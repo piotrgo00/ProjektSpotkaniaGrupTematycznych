@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
@@ -56,6 +56,9 @@ namespace ProjektSpotkaniaGrupTematycznych
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = false;
             });
+            /*
+            services.AddDbContext<ProjektSpotkaniaGrupTematycznychContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ProjektSpotkaniaGrupTematycznychContext")));*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

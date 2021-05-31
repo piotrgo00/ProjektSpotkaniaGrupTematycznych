@@ -1,12 +1,17 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ProjektSpotkaniaGrupTematycznych.Migrations
+namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
 {
-    public partial class GContext1 : Migration
+    public partial class modelsMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<int>(
+                name: "GroupId",
+                table: "AspNetUsers",
+                nullable: true);
+
             migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
@@ -44,38 +49,6 @@ namespace ProjektSpotkaniaGrupTematycznych.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdentityUser",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
-                    NormalizedUserName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    NormalizedEmail = table.Column<string>(nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    GroupId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdentityUser", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_IdentityUser_Group_GroupId",
-                        column: x => x.GroupId,
-                        principalTable: "Group",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Meeting",
                 columns: table => new
                 {
@@ -100,25 +73,34 @@ namespace ProjektSpotkaniaGrupTematycznych.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_GroupId",
+                table: "AspNetUsers",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Group_GroupCategoryId",
                 table: "Group",
                 column: "GroupCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityUser_GroupId",
-                table: "IdentityUser",
-                column: "GroupId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Meeting_GroupId",
                 table: "Meeting",
                 column: "GroupId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUsers_Group_GroupId",
+                table: "AspNetUsers",
+                column: "GroupId",
+                principalTable: "Group",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "IdentityUser");
+            migrationBuilder.DropForeignKey(
+                name: "FK_AspNetUsers_Group_GroupId",
+                table: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Meeting");
@@ -128,6 +110,14 @@ namespace ProjektSpotkaniaGrupTematycznych.Migrations
 
             migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropIndex(
+                name: "IX_AspNetUsers_GroupId",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "GroupId",
+                table: "AspNetUsers");
         }
     }
 }

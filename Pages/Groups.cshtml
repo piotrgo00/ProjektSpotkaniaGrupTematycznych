@@ -8,7 +8,7 @@
 <h1>Groups</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="/CreateGroup">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -24,6 +24,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Group[0].OwnerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Group[0].GroupCategory)
             </th>
             <th></th>
         </tr>
@@ -44,9 +47,19 @@
                 @Html.DisplayFor(modelItem => item.OwnerID)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @foreach (var category in Model.Category)
+                {
+                    @if(item.GroupCategory != null)
+                        @if (category.Id == item.GroupCategory.Id)
+                        {
+                            @Html.DisplayFor(categoryItem => category.CategoryName)
+                        }
+                }
+            </td>
+            <td>
+                <a asp-page="./EditGroup" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./DetailsGroup" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./DeleteGroup" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

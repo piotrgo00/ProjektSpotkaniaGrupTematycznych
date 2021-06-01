@@ -20,10 +20,12 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
         }
 
         public IList<Group> Group { get;set; }
+        public IList<Category> Category { get; set; }
 
         public async Task OnGetAsync()
         {
             Group = await _context.Group.ToListAsync();
+            Category = await _context.Category.ToListAsync();
         }
     }
 }

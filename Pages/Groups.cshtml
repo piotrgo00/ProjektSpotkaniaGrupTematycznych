@@ -47,14 +47,7 @@
                 @Html.DisplayFor(modelItem => item.OwnerID)
             </td>
             <td>
-                @foreach (var category in Model.Category)
-                {
-                    @if(item.GroupCategory != null)
-                        @if (category.Id == item.GroupCategory.Id)
-                        {
-                            @Html.DisplayFor(categoryItem => category.CategoryName)
-                        }
-                }
+                @Html.DisplayFor(modelItem => item.GroupCategory.CategoryName)
             </td>
             <td>
                 <a asp-page="./EditGroup" asp-route-id="@item.Id">Edit</a> |

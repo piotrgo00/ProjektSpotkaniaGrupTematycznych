@@ -66,7 +66,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Groups");
         }
 
         private bool GroupExists(int id)

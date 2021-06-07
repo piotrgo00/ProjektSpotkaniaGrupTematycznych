@@ -28,7 +28,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         [Display(Name = "Miasto")]
         public string City { get; set; }
 
-
+        [Display(Name = "Members")]
         public List<IdentityUser> Members { get; set; }
         
         

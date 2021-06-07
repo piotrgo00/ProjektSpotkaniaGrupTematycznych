@@ -55,10 +55,15 @@
                 </td>
                 <td>
                     <a asp-page="./DetailsGroup" asp-route-id="@item.Id">Details</a>
+
                     @if (UserManager.GetUserId(User) == item.OwnerID)
                     {
                         <a asp-page="./EditGroup" asp-route-id="@item.Id">Edit</a>
                         <a asp-page="./DeleteGroup" asp-route-id="@item.Id">Delete</a>
+                    }
+                    else
+                    {
+                        <a asp-page="./Enlist" asp-route-id="@item.Id">Become member!</a>
                     }
                 </td>
             </tr>

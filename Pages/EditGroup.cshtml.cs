@@ -16,10 +16,10 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
     [Authorize]
     public class EditGroupModel : PageModel
     {
-        private readonly ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public EditGroupModel(ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public EditGroupModel(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;

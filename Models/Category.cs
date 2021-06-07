@@ -12,6 +12,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         //public string Creator { get; set; } //id
         [Required]
         [MaxLength(20)]
+        [Display(Name = "Kategoria grupy")]
         public string CategoryName { get; set; }
 
     }

@@ -10,23 +10,32 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
 {
     public class Group
     {
+        
         public int Id { get; set; }
+
         [Required]
         [MaxLength(20)]
         [Display(Name = "Nazwa grupy")]
         public string GroupName { get; set; }
+
         [Required]
         [MaxLength(120)]
         [Display(Name = "Opis")]
         public string GroupDescription { get; set; }
+
         [Required]
         [MaxLength(20)]
         [Display(Name = "Miasto")]
         public string City { get; set; }
 
+
         public List<IdentityUser> Members { get; set; }
+        
+        
         public string OwnerID { get; set; }
 
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name = "Kategoria")]
         public int? GroupCategoryId { get; set; }
 
         [Display(Name = "Kategoria")]

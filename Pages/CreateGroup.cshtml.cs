@@ -60,12 +60,20 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
                 System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(ModelState));
                 return Page();
             }
-
-            foreach (var x in Categories)
+            if (Group.GroupCategoryId == null || Group.GroupCategoryId == 0)
             {
-                if (Group.GroupCategoryId == x.Id)
-                    Group.GroupCategory = x;
+                Group.GroupCategory = null;
+                Group.GroupCategoryId = null;
             }
+            else
+            {
+                foreach (var x in Categories)
+                {
+                    if (Group.GroupCategoryId == x.Id)
+                        Group.GroupCategory = x;
+                }
+            }
+            
             Group.OwnerID = _userManager.GetUserId(HttpContext.User);
 
 

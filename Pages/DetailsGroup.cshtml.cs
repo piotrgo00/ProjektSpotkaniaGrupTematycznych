@@ -34,6 +34,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             {
                 return NotFound();
             }
+
             return Page();
         }
     }

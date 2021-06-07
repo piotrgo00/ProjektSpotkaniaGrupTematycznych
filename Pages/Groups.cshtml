@@ -4,6 +4,9 @@
 @{
     ViewData["Title"] = "Groups";
 }
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 <h1>Groups</h1>
 
@@ -32,29 +35,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Group) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroupName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroupDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwnerID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroupCategory.CategoryName)
-            </td>
-            <td>
-                <a asp-page="./EditGroup" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./DetailsGroup" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./DeleteGroup" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Group)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupCategory.CategoryName)
+                </td>
+                <td>
+                    <a asp-page="./DetailsGroup" asp-route-id="@item.Id">Details</a>
+                    @if (UserManager.GetUserId(User) == item.OwnerID)
+                    {
+                        <a asp-page="./EditGroup" asp-route-id="@item.Id">Edit</a>
+                        <a asp-page="./DeleteGroup" asp-route-id="@item.Id">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

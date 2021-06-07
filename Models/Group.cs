@@ -27,7 +27,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         public List<IdentityUser> Members { get; set; }
         public string OwnerID { get; set; }
 
-        public int GroupCategoryId { get; set; }
+        public int? GroupCategoryId { get; set; }
 
         [Display(Name = "Kategoria")]
         [ForeignKey("GroupCategoryId")]

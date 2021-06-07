@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,15 +16,15 @@ using ProjektSpotkaniaGrupTematycznych.Models;
 
 namespace ProjektSpotkaniaGrupTematycznych.Pages
 {
+    [Authorize]
     public class CreateGroupModel : PageModel
     {
         private readonly ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext _context;
-        public IConfiguration _configuration { get; }
-
-        public CreateGroupModel(ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext context, IConfiguration configuration)
+        private readonly UserManager<IdentityUser> _userManager;
+        public CreateGroupModel(ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
-            _configuration = configuration;
+            _userManager = userManager;
         }
 
         public IActionResult OnGet()
@@ -31,42 +34,39 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
 
         [BindProperty]
         public Group Group { get; set; }
-        public List<string> Categories 
-        { 
-            get 
+        [BindProperty]
+        public List<Category> Categories
+        {
+            get
             {
-                SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
-                //SqlConnection con = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=aspnet-ProjektSpotkaniaGrupTematycznych-53bc9b9d-9d6a-45d4-8429-2a2761773502;Trusted_Connection=True;MultipleActiveResultSets=true");
-                string query = "SELECT CategoryName FROM [dbo].[Category]";
-                SqlCommand cmd = new SqlCommand(query, con);
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                List<string> temporary = new List<string>();
-                while (reader.Read())
+                var categories = _context.Category.ToList();
+                List<Category> temp = new List<Category>();
+                temp.Add(new Category());
+                foreach (var x in categories)
                 {
-                    temporary.Add(reader.GetString(0));
+                    temp.Add(x);
                 }
-
-                reader.Close();
-                con.Close();
-
-                return temporary;
-            } 
+                return temp;
+            }
+            set { }
         }
-       // public IList<Category> Categories { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
-        {
-            
+        {    
             if (!ModelState.IsValid)
             {
+                System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(ModelState));
                 return Page();
             }
-            //Categories = await _context.Category.ToListAsync();
-           // foreach(var x in Categories)
-                //cCategories.Add(new SelectListItem() { Text = x.CategoryName, Value = x.Id.ToString() });
+
+            foreach (var x in Categories)
+            {
+                if (Group.GroupCategoryId == x.Id)
+                    Group.GroupCategory = x;
+            }
+            Group.OwnerID = _userManager.GetUserId(HttpContext.User);
 
 
             _context.Group.Add(Group);

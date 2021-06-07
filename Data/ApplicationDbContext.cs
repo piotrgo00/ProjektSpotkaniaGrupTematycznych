@@ -16,5 +16,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<Group> Group { get; set; }
         public DbSet<Meeting> Meeting { get; set; }
+
+        public DbSet<InvitationRequest> InvitationRequest { get; set; }
     }
 }

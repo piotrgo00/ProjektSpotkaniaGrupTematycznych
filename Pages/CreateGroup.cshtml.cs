@@ -60,6 +60,13 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
                 System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(ModelState));
                 return Page();
             }
+
+            if (_context.Group.Where(m => m.OwnerID == _userManager.GetUserId(User)).Count() >= 3) //tutaj ma sie odwolywac do appsettings
+            {
+                return Page(); // i tutaj jaks wiadomosc
+            }
+
+                
             if (Group.GroupCategoryId == null || Group.GroupCategoryId == 0)
             {
                 Group.GroupCategory = null;

@@ -1,0 +1,36 @@
+﻿@page
+@model ProjektSpotkaniaGrupTematycznych.Pages.CategoriesModel
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1>Categories</h1>
+
+<p>
+    <a asp-page="CreateCategory">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category[0].CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Category) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                <a asp-page="./EditCategory" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./DetailsCategory" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./DeleteCategory" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,8 +27,10 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         public List<IdentityUser> Members { get; set; }
         public string OwnerID { get; set; }
 
+        public int GroupCategoryId { get; set; }
 
         [Display(Name = "Kategoria")]
+        [ForeignKey("GroupCategoryId")]
         public Category GroupCategory { get; set; }
 
         public List<Meeting> Meetings { get; set; }

@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace ProjektSpotkaniaGrupTematycznych.Models
 {
     public class Group
-    {
-        
+    {  
         public int Id { get; set; }
 
         [Required]

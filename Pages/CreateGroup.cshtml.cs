@@ -74,11 +74,12 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             }
             else
             {
-                foreach (var x in Categories)
+                Group.GroupCategory = await _context.Category.FirstOrDefaultAsync(x => x.Id == Group.GroupCategoryId);
+                /*foreach (var x in Categories)
                 {
                     if (Group.GroupCategoryId == x.Id)
                         Group.GroupCategory = x;
-                }
+                }*/
             }
             
             Group.OwnerID = _userManager.GetUserId(HttpContext.User);

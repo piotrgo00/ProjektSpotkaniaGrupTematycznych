@@ -14,14 +14,15 @@ using Microsoft.Extensions.Configuration;
 using ProjektSpotkaniaGrupTematycznych.Data;
 using ProjektSpotkaniaGrupTematycznych.Models;
 
+
 namespace ProjektSpotkaniaGrupTematycznych.Pages
 {
     [Authorize]
     public class CreateGroupModel : PageModel
     {
         private readonly ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
-        public CreateGroupModel(ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public CreateGroupModel(ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;

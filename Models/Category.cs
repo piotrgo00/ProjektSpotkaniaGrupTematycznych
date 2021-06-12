@@ -8,6 +8,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
 {
     public class Category
     {
+        [Key]
         public int Id { get; set; }
         //public string Creator { get; set; } //id
         [Required]

@@ -5,8 +5,10 @@
     ViewData["Title"] = "Groups";
 }
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using ProjektSpotkaniaGrupTematycznych.Models;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 <h1>Groups</h1>
 

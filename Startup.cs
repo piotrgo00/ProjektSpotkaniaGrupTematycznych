@@ -49,8 +49,8 @@ namespace ProjektSpotkaniaGrupTematycznych
                     .AddDefaultTokenProviders();
 
 
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.Configure<AuthMessageSenderOptions>(Configuration);
+            //services.AddTransient<IEmailSender, EmailSender>();
+            //services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddRazorPages();
             

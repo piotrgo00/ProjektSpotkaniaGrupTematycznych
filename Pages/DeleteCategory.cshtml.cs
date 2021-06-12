@@ -46,6 +46,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             }
 
             Category = await _context.Category.FindAsync(id);
+            var Group = _context.Group.Where(b => b.GroupCategoryId == id).ToList();
 
             if (Category != null)
             {

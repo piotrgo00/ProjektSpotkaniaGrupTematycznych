@@ -14,13 +14,16 @@ namespace ProjektSpotkaniaGrupTematycznych.Services
         public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
         {
             Options = optionsAccessor.Value;
+            apiKey = "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";
         }
 
         public AuthMessageSenderOptions Options { get; } //set only via Secret Manager
 
+        private string apiKey;
+
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            return Execute(Options.SendGridKey, subject, message, email);
+            return Execute(apiKey, subject, message, email);
         }
 
         public Task Execute(string apiKey, string subject, string message, string email)
@@ -28,7 +31,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("Joe@contoso.com", Options.SendGridUser),
+                From = new EmailAddress("piotrgo2000@gmail.com", Options.SendGridUser),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

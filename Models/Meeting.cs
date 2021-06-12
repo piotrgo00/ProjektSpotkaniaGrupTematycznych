@@ -9,6 +9,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
 {
     public class Meeting
     {
+        [Key]
         public int Id { get; set; } //Meeting ID
 
         [Required]

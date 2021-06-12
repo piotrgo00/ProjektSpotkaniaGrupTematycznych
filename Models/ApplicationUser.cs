@@ -14,8 +14,12 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         [Display(Name = "Zdjęcie profilowe")]
         public byte[] Image { get; set; }
         //public string AvatarURL { get; set; }
+        [Required]
+        [MaxLength(25)]
         [Display(Name = "Imię")]
         public string FirstName { get; set; }
+        [Required]
+        [MaxLength(25)]
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
     }

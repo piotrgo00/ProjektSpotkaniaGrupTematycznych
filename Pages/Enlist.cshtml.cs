@@ -17,6 +17,9 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        
+        [BindProperty]
+        public InvitationRequest InvRequest { get; set; }
 
         public EnlistModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
@@ -39,6 +42,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             {
                 return NotFound();
             }
+            if  (Group.OwnerID == _userManager.GetUserId(HttpContext.User))
+                return RedirectToPage("./Groups");
 
             return Page();
         }
@@ -52,13 +57,30 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
 
             Group = await _context.Group.FindAsync(id);
 
-            if (Group != null)
+            if (Group == null)
             {
-                //tutaj sie zapisz i wyswielt komunikat przy powrocie do lissty
-                return RedirectToPage("./Groups");
+                //jakis tempdata ze jest error
+                return Page();
             }
+            var userId = _userManager.GetUserId(HttpContext.User);
 
-            return Page();
+            var _inv = _context.InvitationRequest.Where(p => p.InvokerId == userId && p.GroupID == (int)id); //istnieje juz taki request
+            if (_inv != null)
+            {
+                //error message
+                return Page();
+            }
+            InvRequest.GroupID = (int)id;
+            InvRequest.RequestDate = DateTime.Now;
+            InvRequest.InvokerId = userId;
+
+            _context.InvitationRequest.Add(InvRequest);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Groups");
+            
+
+            //return Page();
         }
     }
 }

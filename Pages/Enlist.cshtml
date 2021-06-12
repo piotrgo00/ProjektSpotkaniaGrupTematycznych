@@ -15,9 +15,26 @@
     </dd>
 </dl>
 
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="InvRequest.Reason" class="control-label"></label>
+                <input asp-for="InvRequest.Reason" class="form-control" />
+                <span asp-validation-for="InvRequest.Reason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Group.Id" />
+                <input type="submit" value="Enlist!" class="btn btn-danger" />
+            </div>
+            <a asp-page="./Groups">Back to List</a>
+
+        </form>
+    </div>
+</div>
+
 
     <form method="post">
-        <input type="hidden" asp-for="Group.Id" />
-        <input type="submit" value="Enlist!" class="btn btn-danger" /> |
-        <a asp-page="./Groups">Back to List</a>
+        
     </form>

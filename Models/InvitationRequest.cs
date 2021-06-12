@@ -8,12 +8,20 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
 {
     public class InvitationRequest
     {
+        public InvitationRequest() { }
+        public InvitationRequest(DateTime RequestDate, string Invoker, string Reason, int GroupID)
+        {
+            this.RequestDate = RequestDate;
+            this.InvokerId = Invoker;
+            this.Reason = Reason;
+            this.GroupID = GroupID;
+        }
         [Key]
         public int Id { get; set; }
         public DateTime RequestDate { get; set; }
         public string InvokerId { get; set; }
 
-        
+        [MaxLength(255)]
         public string Reason { get; set; }
 
 

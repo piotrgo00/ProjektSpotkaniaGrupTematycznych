@@ -18,9 +18,12 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         }
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Data")]
         public DateTime RequestDate { get; set; }
+        [Display(Name = "Sender")]
         public string InvokerId { get; set; }
 
+        [Display(Name = "Reason")]
         [MaxLength(255)]
         public string Reason { get; set; }
 

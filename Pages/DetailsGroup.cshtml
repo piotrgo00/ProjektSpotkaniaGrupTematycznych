@@ -53,6 +53,78 @@
         </dt>
 </dl>
 </div>
+<h3>Members</h3>
+<div>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Group.Members[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Group.Members[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Group.Members[0].LastName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Group.Members)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+            </tr>
+        }
+    </tbody>
+    </table>
+</div>
+
+<h3>Inv requests</h3>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.InvitationRequests[0].RequestDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InvitationRequests[0].InvokerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InvitationRequests[0].Reason)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.InvitationRequests)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvokerId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Group.Id">Edit</a> |
     <a asp-page="./Groups">Back to List</a>

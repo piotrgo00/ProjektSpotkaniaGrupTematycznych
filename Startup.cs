@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using ProjektSpotkaniaGrupTematycznych.Services;
 
 namespace ProjektSpotkaniaGrupTematycznych
 {
@@ -34,6 +36,10 @@ namespace ProjektSpotkaniaGrupTematycznych
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
             services.AddRazorPages();
 
             services.Configure<IdentityOptions>(options =>
@@ -54,7 +60,7 @@ namespace ProjektSpotkaniaGrupTematycznych
                 // User settings.
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
             });
             /*
             services.AddDbContext<ProjektSpotkaniaGrupTematycznychContext>(options =>

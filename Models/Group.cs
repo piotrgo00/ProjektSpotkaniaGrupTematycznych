@@ -10,6 +10,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
 {
     public class Group
     {  
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -28,7 +29,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         public string City { get; set; }
 
         [Display(Name = "Members")]
-        public List<IdentityUser> Members { get; set; }
+        public List<ApplicationUser> Members { get; set; }
         
         
         public string OwnerID { get; set; }

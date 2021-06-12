@@ -10,14 +10,15 @@ using ProjektSpotkaniaGrupTematycznych.Models;
 using System.Text.Json;
 using Microsoft.AspNetCore.Identity;
 
+
 namespace ProjektSpotkaniaGrupTematycznych.Pages
 {
     public class DetailsGroupModel : PageModel
     {
         private readonly ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public DetailsGroupModel(ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public DetailsGroupModel(ProjektSpotkaniaGrupTematycznych.Data.ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;

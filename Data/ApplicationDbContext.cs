@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ProjektSpotkaniaGrupTematycznych.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -18,5 +18,6 @@ namespace ProjektSpotkaniaGrupTematycznych.Data
         public DbSet<Meeting> Meeting { get; set; }
 
         public DbSet<InvitationRequest> InvitationRequest { get; set; }
+        
     }
 }

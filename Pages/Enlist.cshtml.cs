@@ -64,8 +64,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             }
             var userId = _userManager.GetUserId(HttpContext.User);
 
-            var _inv = _context.InvitationRequest.Where(p => p.InvokerId == userId && p.GroupID == (int)id); //istnieje juz taki request
-            if (_inv != null)
+            var _inv = _context.InvitationRequest.Where(p => p.InvokerId == userId && p.GroupID == (int)id).ToList(); //istnieje juz taki request
+            if (_inv.Count >0)
             {
                 //error message
                 return Page();

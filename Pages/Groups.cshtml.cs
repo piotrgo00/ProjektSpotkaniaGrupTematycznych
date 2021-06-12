@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ProjektSpotkaniaGrupTematycznych.Data;
 using ProjektSpotkaniaGrupTematycznych.Models;
+using System.Text.Json;
 
 namespace ProjektSpotkaniaGrupTematycznych.Pages
 {
@@ -31,7 +32,10 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
         public async Task OnGetAsync()
         {
             Group = await _context.Group.ToListAsync();
+            System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(Group));
             Category = await _context.Category.ToListAsync();
+            
+            
         }
         public async Task<IActionResult> OnPostAsync()
         {

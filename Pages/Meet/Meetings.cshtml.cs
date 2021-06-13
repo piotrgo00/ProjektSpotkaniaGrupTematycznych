@@ -28,6 +28,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
 
         public async Task<IActionResult> OnGetAsync()
         {
+
+            //naprawic wlasicieli grup
             var uid = _userManager.GetUserId(User);
             List<UserGroup> userGroups = _context.UserGroups.Where(e => e.UserId == uid).ToList();
             List<int> userGroupsIds = new List<int>();

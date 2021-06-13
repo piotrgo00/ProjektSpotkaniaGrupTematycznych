@@ -1,0 +1,95 @@
+﻿@page
+@model ProjektSpotkaniaGrupTematycznych.Pages.Meet.MeetingDetailsModel
+@{
+}
+
+@using Microsoft.AspNetCore.Identity
+@using ProjektSpotkaniaGrupTematycznych.Models;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<h1>DetailsGroup</h1>
+
+<div>
+    <h4>Meeting</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meeting.Topic)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meeting.Topic)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meeting.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meeting.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meeting.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meeting.Location)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Group.GroupName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Group.GroupName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meeting.ParticipantLimit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meeting.ParticipantLimit)
+        </dd>
+
+    </dl>
+</div>
+<h3>Participants @Model.Meeting.Participants.Count/@Model.Meeting.ParticipantLimit</h3>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Meeting.Participants.ToList()[0].User.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Meeting.Participants.ToList()[0].User.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Meeting.Participants.ToList()[0].User.LastName)
+                </th>
+                <th>
+                    <a>Action</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Meeting.Participants)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.LastName)
+                    </td>
+                    <td>
+                        <a asp-page="/Manage/DeleteMember" asp-route-uid="@item.UserId" asp-route-gid="@Model.Group.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Group.Id">Edit</a> |
+    <a asp-page="./Groups">Back to List</a>
+</div>

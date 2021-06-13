@@ -18,10 +18,10 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
         {
             _context = context;
         }
-
+        public int? _gid { get; set; }
         public IActionResult OnGetAsync(int? gid)
         {
-
+            _gid = gid;
             return Page();
         }
 

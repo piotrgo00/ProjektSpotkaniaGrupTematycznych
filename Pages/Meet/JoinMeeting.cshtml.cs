@@ -48,7 +48,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             ApplicationUser user = _userManager.Users.FirstOrDefault(u => u.Id == uid);
 
             if (Meeting.Participants.Count >= Meeting.ParticipantLimit)
-                RedirectToPage("Meet/LimitReached");
+                RedirectToPage("/Meet/LimitReached");
 
             Meeting.Participants.Add(new UserMeeting { Meeting = this.Meeting, MeetingId = this.Meeting.Id, User = user, UserId = user.Id });
 
@@ -56,7 +56,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             await _context.SaveChangesAsync();
 
 
-            return RedirectToPage("Meet/DetailsGroup", new { mid = Meeting.Id }); //need tempdata to return
+            return RedirectToPage("/Meet/DetailsGroup", new { mid = Meeting.Id }); //need tempdata to return
         }
     }
 }

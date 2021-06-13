@@ -36,7 +36,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             _context.Attach(Meeting).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("Meet/MeetingDetails", new { mid = Meeting.Id });
+            return RedirectToPage("/Meet/MeetingDetails", new { mid = Meeting.Id });
         }
         
     }

@@ -47,7 +47,8 @@
                 @Html.DisplayFor(modelItem => item.ParticipantLimit)
             </td>
             <td>
-                <a asp-page="/Meet/MeetingDetails" asp-route-mid="@item.Id">Details</a>
+                <a asp-page="/Meet/MeetingDetails" asp-route-mid="@item.Id">Details</a> |
+                <a asp-page="/Meet/LeaveMeeting" asp-route-mid="@item.Id">Leave meeting</a>
             </td>
         </tr>
 }

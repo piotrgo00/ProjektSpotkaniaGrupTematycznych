@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjektSpotkaniaGrupTematycznych.Data;
 using ProjektSpotkaniaGrupTematycznych.Models;
 
-namespace ProjektSpotkaniaGrupTematycznych.Pages.MeetingFolder
+namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
 {
     public class MeetingsModel : PageModel
     {

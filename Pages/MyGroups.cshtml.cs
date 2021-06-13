@@ -45,7 +45,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
                 GroupName = "";
             if (CityName == null)
                 CityName = "";
-            Group = await _context.Group.Include(g => g.Members).FirstOrDefault();
+            //Group = await _context.Group.Include(g => g.Members).FirstOrDefault();
             Category = await _context.Category.ToListAsync();
             return Page();
         }

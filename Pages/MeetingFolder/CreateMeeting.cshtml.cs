@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjektSpotkaniaGrupTematycznych.Data;
 using ProjektSpotkaniaGrupTematycznych.Models;
 
-namespace ProjektSpotkaniaGrupTematycznych.Pages
+namespace ProjektSpotkaniaGrupTematycznych.Pages.MeetingFolder
 {
     public class CreateMeetingModel : PageModel
     {

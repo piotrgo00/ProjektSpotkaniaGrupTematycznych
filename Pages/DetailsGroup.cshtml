@@ -145,7 +145,7 @@
     </table>
     @if (UserManager.GetUserId(User) == Model.Group.OwnerID)
     {
-        <a asp-page="./Meeting/CreateMeeting" asp-route-gid="@Model.Group.Id">Add meeting</a>
+        <a asp-page="./MeetingFolder/CreateMeeting" asp-route-gid="@Model.Group.Id">Add meeting</a>
     }
 </div>
 @if (UserManager.GetUserId(User) == Model.Group.OwnerID)

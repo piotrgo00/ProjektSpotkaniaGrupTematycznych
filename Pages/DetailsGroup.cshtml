@@ -90,7 +90,7 @@
                         @Html.DisplayFor(modelItem => item.User.LastName)
                     </td>
                     <td>
-                        <a asp-page="/Manage/DeleteMember" asp-route-id="@item.UserId">Delete</a>
+                        <a asp-page="/Manage/DeleteMember" asp-route-uid="@item.UserId" asp-route-gid="@Model.Group.Id">Delete</a>
                     </td>
                 </tr>
             }

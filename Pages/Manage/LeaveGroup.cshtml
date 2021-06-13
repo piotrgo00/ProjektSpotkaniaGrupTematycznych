@@ -1,0 +1,12 @@
+﻿@page
+@model ProjektSpotkaniaGrupTematycznych.Pages.Manage.LeaveGroupModel
+@{
+}
+<h1>Leave group @Model.Group.GroupName</h1>
+<h3>Are you sure you want to do this?</h3>
+<div>
+    <form method="post">
+        <input type="submit" value="Accept" />
+    </form>
+    <a asp-page="/DetailsGroup" asp-route-id="@Model.Group.Id">Back to the Group Details</a>
+</div>

@@ -1,0 +1,12 @@
+﻿@page
+@model ProjektSpotkaniaGrupTematycznych.Pages.Meet.LeaveMeetingModel
+@{
+}
+<h1>Leave Meeting @Model.Meeting.Topic</h1>
+<h3>Are you sure you want to do this?</h3>
+<div>
+    <form method="post">
+        <input type="submit" value="Accept" />
+    </form>
+    <a asp-page="Meet/MeetingDetails" asp-route-mid="@Model.Meeting.Id">Back to the Group Details</a>
+</div>

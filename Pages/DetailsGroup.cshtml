@@ -54,7 +54,7 @@
                 <h5>Owner of the group has not selected category!</h5>
             }
         </dd>
-        
+
     </dl>
 </div>
 <h3>Members</h3>
@@ -88,54 +88,107 @@
                         @Html.DisplayFor(modelItem => item.User.LastName)
                     </td>
                     <td>
-
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-@if (UserManager.GetUserId(User) == Model.Group.OwnerID) { 
-    <h3>Inv requests</h3>
+<h3>Meetings</h3>
 <div>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.InvitationRequests[0].RequestDate)
+                    @Html.DisplayNameFor(model => model.Group.Meetings.ToList()[0].Date)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.InvitationRequests[0].InvokerId)
+                    @Html.DisplayNameFor(model => model.Group.Meetings.ToList()[0].Topic)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.InvitationRequests[0].Reason)
+                    @Html.DisplayNameFor(model => model.Group.Meetings.ToList()[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Group.Meetings.ToList()[0].Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Group.Meetings.ToList()[0].ParticipantLimit)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.InvitationRequests)
-            { if (item.Status == InvitationStatus.Pending) { 
+            @foreach (var item in Model.Group.Meetings)
+            {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RequestDate)
+                        @Html.DisplayFor(modelItem => item.Date)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.InvokerId)
+                        @Html.DisplayFor(modelItem => item.Topic)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Reason)
+                        @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
-                        <a asp-page="Manage/AcceptRequest" asp-route-id="@item.Id">Accept</a> |
-                        <a asp-page="/Manage/DetailsGroup" asp-route-id="@item.Id">Decline</a>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParticipantLimit)
                     </td>
                 </tr>
-                }
             }
         </tbody>
     </table>
+    @if (UserManager.GetUserId(User) == Model.Group.OwnerID)
+    {
+        <a asp-page="./CreateMeeting" asp-route-id="@Model.Group.Id">Add meeting</a>
+    }
 </div>
+@if (UserManager.GetUserId(User) == Model.Group.OwnerID)
+{
+    <h3>Inv requests</h3>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InvitationRequests[0].RequestDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InvitationRequests[0].InvokerId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InvitationRequests[0].Reason)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.InvitationRequests)
+                {
+                    if (item.Status == InvitationStatus.Pending)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RequestDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InvokerId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Reason)
+                            </td>
+                            <td>
+                                <a asp-page="Manage/AcceptRequest" asp-route-id="@item.Id">Accept</a> |
+                                <a asp-page="/Manage/DetailsGroup" asp-route-id="@item.Id">Decline</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 }
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Group.Id">Edit</a> |

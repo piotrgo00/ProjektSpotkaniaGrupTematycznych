@@ -140,7 +140,18 @@
                     @Html.DisplayFor(modelItem => item.ParticipantLimit)
                 </td>
                 <td>
+               @if (!(UserManager.GetUserId(User) == Model.Group.OwnerID || Model.IsInMeeting(item, UserManager.GetUserId(User))))
+                {
+                    
                     <a asp-page="./Meet/JoinMeeting" asp-route-mid="@item.Id">Join Meeting</a>
+                    
+                }
+                else if (UserManager.GetUserId(User) == Model.Group.OwnerID)
+                {
+                    
+                    <a asp-page="./Meet/DeleteMeeting" asp-route-mid="@item.Id">Delete Meeting</a>
+                }
+                <a asp-page="./Meet/MeetingDetails" asp-route-mid="@item.Id">Details</a>
                 </td>
             </tr>
             }

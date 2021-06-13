@@ -30,7 +30,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             if (mid == null)
                 return NotFound();
             Meeting = _context.Meeting.Include(f => f.Participants).ThenInclude(g => g.User).Where(e => e.Id == mid).FirstOrDefault();
-            Group = _context.Group.Where(e => e.Id == Meeting.GroupID).FirstOrDefault();
+            //Group = _context.Group.Where(e => e.Id == Meeting.GroupID).FirstOrDefault();
 
             
 
@@ -42,7 +42,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             if (mid == null)
                 return NotFound();
             Meeting = _context.Meeting.Include(f => f.Participants).ThenInclude(g => g.User).Where(e => e.Id == mid).FirstOrDefault();
-            Group = _context.Group.Where(e => e.Id == Meeting.GroupID).FirstOrDefault();
+            //Group = _context.Group.Where(e => e.Id == Meeting.GroupID).FirstOrDefault();
 
             var uid = _userManager.GetUserId(User);
             ApplicationUser user = _userManager.Users.FirstOrDefault(u => u.Id == uid);

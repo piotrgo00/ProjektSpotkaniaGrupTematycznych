@@ -31,19 +31,31 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
 
             //naprawic wlasicieli grup
             var uid = _userManager.GetUserId(User);
-            List<UserGroup> userGroups = _context.UserGroups.Where(e => e.UserId == uid).ToList();
+            //List<UserGroup> userGroups = _context.UserGroups.Where(e => e.UserId == uid).ToList();
             List<Group> ownedGroups = _context.Group.Where(e => e.OwnerID == uid).ToList();
-            List<int> userGroupsIds = new List<int>();
-            foreach(var item in userGroups)
+            List<UserMeeting> userMeetings = _context.UserMeeting.Where(e => e.UserId == uid).ToList();
+            List<int> ownedGroupsIds = new List<int>();
+            foreach (var item in ownedGroups)
             {
-                userGroupsIds.Add(item.GroupId);
+                ownedGroupsIds.Add(item.Id);
             }
-            foreach(var item in ownedGroups)
+            
+
+            List<int> MeetingsIds = new List<int>();
+
+            foreach (var item in userMeetings)
             {
-                userGroupsIds.Add(item.Id);
+                MeetingsIds.Add(item.MeetingId);
             }
+
+            List<Meeting> OwnedMeetings = _context.Meeting.Where(m => ownedGroupsIds.Contains(m.GroupID)).ToList();
+            foreach(var item in OwnedMeetings)
+            {
+                MeetingsIds.Add(item.Id);
+            }
+
             //group = await _context.Group.Include(g => g.Members).ThenInclude(y => y.User).Include(group => group.Meetings).FirstOrDefaultAsync(m => m.Id == gid);
-            Meetings = _context.Meeting.Where(e => userGroupsIds.Contains(e.GroupID)).ToList();
+            Meetings = _context.Meeting.Where(e => MeetingsIds.Contains(e.Id)).ToList();
 
 
             return Page();

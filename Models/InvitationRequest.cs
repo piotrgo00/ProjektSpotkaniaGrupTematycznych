@@ -29,5 +29,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
 
 
         public int GroupID { get; set; }
+        public bool Pending { get; set; }
+        public bool Declined { get; set; }
     }
 }

@@ -26,16 +26,16 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             _context = context;
         }
 
-        public IList<Group> Group { get;set; }
-        public IList<Category> Category { get; set; }
+        public IList<Group> Groups { get;set; }
+        public IList<Category> Categories { get; set; }
+        public IList<InvitationRequest> InvRequests { get; set; }
 
         public async Task OnGetAsync()
         {
-            Group = await _context.Group.ToListAsync();
-            System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(Group));
-            Category = await _context.Category.ToListAsync();
-            
-            
+            Groups = await _context.Group.ToListAsync();
+            //System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(Groups));
+            Categories = await _context.Category.ToListAsync();
+            InvRequests = await _context.InvitationRequest.ToListAsync();
         }
         public async Task<IActionResult> OnPostAsync()
         {
@@ -45,8 +45,9 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
                 GroupName = "";
             if (CityName == null)
                 CityName = "";
-            Group = _context.Group.Where(entity => entity.GroupName.Contains(GroupName) && entity.GroupCategory.CategoryName.Contains(CategoryName) && entity.City.Contains(CityName)).OrderByDescending(entity => entity.Id).ToList();
-            Category = await _context.Category.ToListAsync();
+            Groups = _context.Group.Where(entity => entity.GroupName.Contains(GroupName) && entity.GroupCategory.CategoryName.Contains(CategoryName) && entity.City.Contains(CityName)).OrderByDescending(entity => entity.Id).ToList();
+            Categories = await _context.Category.ToListAsync();
+            InvRequests = await _context.InvitationRequest.ToListAsync();
             return Page();
         }
     }

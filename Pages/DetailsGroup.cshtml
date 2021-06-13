@@ -45,7 +45,7 @@
             }
             else
             {
-                <h5>Owner of the group has not selected category!</h5>
+                <a>Owner of the group has not selected category!</a>
             }
         </dd>
         <dt class="col-sm-2">
@@ -103,7 +103,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.InvitationRequests[0].Reason)
                 </th>
-                <th></th>
+                <th>
+                    <a>Action</a>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -118,6 +120,10 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                    <td>
+                        <a style="color:forestgreen" asp-page="/Manage/AcceptRequest" asp-route-id="@item.Id">Accept</a> |
+                        <a style="color:red" asp-page="/Manage/DeclineRequest" asp-route-id="@item.Id">Decline</a>
                     </td>
                 </tr>
             }

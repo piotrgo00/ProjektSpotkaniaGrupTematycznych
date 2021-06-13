@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using ProjektSpotkaniaGrupTematycznych.Data;
 using ProjektSpotkaniaGrupTematycznych.Models;
 
@@ -19,9 +20,37 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
             _context = context;
             _userManager = userManager;
         }
-
-        public void OnGet()
+        public Group Group { get; set; }
+        public InvitationRequest InvRequest { get; set; }
+        public ApplicationUser Invoker { get; set; }
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            InvRequest = _context.InvitationRequest.FirstOrDefault(m => m.Id == id);
+            Group = _context.Group.FirstOrDefault(g => g.Id == InvRequest.GroupID);
+            Invoker = await _userManager.FindByIdAsync(InvRequest.InvokerId);
+            
+            return Page();
+        }
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            InvRequest = _context.InvitationRequest.FirstOrDefault(m => m.Id == id);
+            Group = _context.Group.FirstOrDefault(g => g.Id == InvRequest.GroupID);
+            Invoker = await _userManager.FindByIdAsync(InvRequest.InvokerId);
+
+            InvRequest.Pending = false;
+           // Group.Members.Add(Invoker);
+
+            return RedirectToPage("/Groups");
         }
     }
 }

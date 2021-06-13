@@ -73,6 +73,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             InvRequest.GroupID = (int)id;
             InvRequest.RequestDate = DateTime.Now;
             InvRequest.InvokerId = userId;
+            InvRequest.Pending = true;
 
             _context.InvitationRequest.Add(InvRequest);
             await _context.SaveChangesAsync();

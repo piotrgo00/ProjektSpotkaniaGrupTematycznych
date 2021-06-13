@@ -21,6 +21,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
 
         [BindProperty]
         public Group Group { get; set; }
+        public IList<InvitationRequest> InvRequests { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -40,7 +41,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null)
+            if (id == null) 
             {
                 return NotFound();
             }
@@ -49,6 +50,11 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
 
             if (Group != null)
             {
+                foreach (var x in InvRequests)
+                {
+                    if (x.GroupID == Group.Id)
+                        _context.InvitationRequest.Remove(x);
+                }
                 _context.Group.Remove(Group);
                 await _context.SaveChangesAsync();
             }

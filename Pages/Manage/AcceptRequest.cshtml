@@ -3,6 +3,20 @@
 @{
 }
 <div>
-    <h2>Do you want to accept invitation</h2>
+    <h2>Do you want to accept this invitation?</h2>
 </div>
 
+<div>
+    <h4>Invitation:</h4>
+    <b>@Html.DisplayNameFor(model => model.Invoker.UserName): </b>
+    @Html.DisplayFor(model => model.Invoker.UserName)<br />
+    <b>@Html.DisplayNameFor(model => model.InvRequest.Reason): </b>
+    @Html.DisplayFor(model => model.InvRequest.Reason)<br />
+    <b>@Html.DisplayNameFor(model => model.InvRequest.RequestDate): </b>
+    @Html.DisplayFor(model => model.InvRequest.RequestDate)<br />
+</div>
+<form method="post">
+    <input type="hidden" asp-for="Invoker.Id" />
+    <input type="submit" value="Accept"/> |
+    <a asp-page="./Groups">Back to List</a>
+</form>

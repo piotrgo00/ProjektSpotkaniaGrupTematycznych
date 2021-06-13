@@ -51,7 +51,7 @@
             }
             else
             {
-                <h5>Owner of the group has not selected category!</h5>
+                <a>Owner of the group has not selected category!</a>
             }
         </dd>
         
@@ -71,7 +71,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Group.Members.ToList()[0].User.LastName)
                 </th>
-                <th></th>
+                <th>
+                    <a>Action</a>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -88,7 +90,7 @@
                         @Html.DisplayFor(modelItem => item.User.LastName)
                     </td>
                     <td>
-
+                        <a asp-page="/Manage/DeleteMember" asp-route-id="@item.UserId">Delete</a>
                     </td>
                 </tr>
             }
@@ -110,7 +112,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.InvitationRequests[0].Reason)
                 </th>
-                <th></th>
+                <th>
+                    <a>Action</a>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -127,7 +131,7 @@
                         @Html.DisplayFor(modelItem => item.Reason)
                     </td>
                     <td>
-                        <a asp-page="Manage/AcceptRequest" asp-route-id="@item.Id">Accept</a> |
+                        <a asp-page="/Manage/AcceptRequest" asp-route-id="@item.Id">Accept</a> |
                         <a asp-page="/Manage/DetailsGroup" asp-route-id="@item.Id">Decline</a>
                     </td>
                 </tr>

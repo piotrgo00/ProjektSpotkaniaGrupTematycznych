@@ -20,6 +20,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
 
 
         public InvitationRequest InvitationRequest { get; set; }
+        public Group Group { get; set; }
         public AcceptRequestModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
@@ -32,13 +33,13 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
 
 
             InvitationRequest = _context.InvitationRequest.Where(entity => entity.Id == id && entity.Status == InvitationStatus.Pending).FirstOrDefault();
-            Group group = _context.Group.Where(entity => entity.Id == InvitationRequest.GroupID).FirstOrDefault();
+            Group = _context.Group.Where(entity => entity.Id == InvitationRequest.GroupID).FirstOrDefault();
 
             if (InvitationRequest == null)
                 return NotFound();
-            if (group == null)
+            if (Group == null)
                 return NotFound();
-            if (group.OwnerID != _userManager.GetUserId(User))
+            if (Group.OwnerID != _userManager.GetUserId(User))
                 return Forbid();
 
             return Page(); 
@@ -55,7 +56,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
                 return NotFound();
 
             Group group = _context.Group.Where(entity => entity.Id == InvitationRequest.GroupID).FirstOrDefault();
-
+            
             if (group == null)
                 return NotFound();
 
@@ -77,7 +78,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
             await _context.SaveChangesAsync();
             //return Redirect(HttpContext.Request.Headers["Referer"].ToString());
             //return RedirectToPage(HttpContext.Request.);
-            return Page(); //need tempdata to return
+            return RedirectToPage("/DetailsGroup", new { id = group.Id}); //need tempdata to return
         }
     }
 }

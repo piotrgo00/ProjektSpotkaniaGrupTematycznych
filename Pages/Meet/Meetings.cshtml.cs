@@ -32,13 +32,19 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             //naprawic wlasicieli grup
             var uid = _userManager.GetUserId(User);
             List<UserGroup> userGroups = _context.UserGroups.Where(e => e.UserId == uid).ToList();
+            List<Group> ownedGroups = _context.Group.Where(e => e.OwnerID == uid).ToList();
             List<int> userGroupsIds = new List<int>();
             foreach(var item in userGroups)
             {
                 userGroupsIds.Add(item.GroupId);
             }
+            foreach(var item in ownedGroups)
+            {
+                userGroupsIds.Add(item.Id);
+            }
             //group = await _context.Group.Include(g => g.Members).ThenInclude(y => y.User).Include(group => group.Meetings).FirstOrDefaultAsync(m => m.Id == gid);
             Meetings = _context.Meeting.Where(e => userGroupsIds.Contains(e.GroupID)).ToList();
+
 
             return Page();
         }

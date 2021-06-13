@@ -32,6 +32,9 @@ namespace ProjektSpotkaniaGrupTematycznych.Data
                 .HasOne(ug => ug.User)
                 .WithMany(g => g.Groups)
                 .HasForeignKey(ug => ug.UserId);
+
+
+            //....
         }
     }
 }

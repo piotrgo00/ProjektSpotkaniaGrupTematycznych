@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,6 +16,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly HttpRequest _httpRequest;
+
 
         public InvitationRequest InvitationRequest { get; set; }
         public AcceptRequestModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
@@ -72,8 +75,9 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
             //_context.Attach(group.Members).State = EntityState.Modified;
 
             await _context.SaveChangesAsync();
-            return RedirectToPage("./Groups");
-            //return Page(); //need tempdata to return
+            //return Redirect(HttpContext.Request.Headers["Referer"].ToString());
+            //return RedirectToPage(HttpContext.Request.);
+            return Page(); //need tempdata to return
         }
     }
 }

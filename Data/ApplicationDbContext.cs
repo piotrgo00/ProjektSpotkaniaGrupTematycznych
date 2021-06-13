@@ -20,6 +20,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Data
         public DbSet<InvitationRequest> InvitationRequest { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
         public DbSet<UserMeeting> UserMeeting { get; set; }
+        public DbSet<Ticket> Ticket { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

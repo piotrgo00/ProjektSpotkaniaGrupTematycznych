@@ -36,5 +36,6 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
 
         [Display(Name = "Participants")]
         public ICollection<UserMeeting> Participants { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

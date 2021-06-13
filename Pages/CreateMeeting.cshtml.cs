@@ -18,10 +18,10 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
         {
             _context = context;
         }
-        public int _id { get; set; }
-        public IActionResult OnGetAsync(int id)
+
+        public IActionResult OnGetAsync(int? gid)
         {
-            _id = id;
+
             return Page();
         }
 
@@ -30,13 +30,13 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? gid)
         {
-            Meeting.GroupID = _id;
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+            Meeting.GroupID = (int) gid;
             _context.Meeting.Add(Meeting);
             await _context.SaveChangesAsync();
 

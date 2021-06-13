@@ -26,8 +26,10 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
 
         public IList<Meeting> Meetings { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+
+            //naprawic wlasicieli grup
             var uid = _userManager.GetUserId(User);
             List<UserGroup> userGroups = _context.UserGroups.Where(e => e.UserId == uid).ToList();
             List<int> userGroupsIds = new List<int>();
@@ -37,6 +39,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             }
             //group = await _context.Group.Include(g => g.Members).ThenInclude(y => y.User).Include(group => group.Meetings).FirstOrDefaultAsync(m => m.Id == gid);
             Meetings = _context.Meeting.Where(e => userGroupsIds.Contains(e.GroupID)).ToList();
+
+            return Page();
         }
     }
 }

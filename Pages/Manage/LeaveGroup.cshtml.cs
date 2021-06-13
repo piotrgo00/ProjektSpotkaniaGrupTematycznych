@@ -19,6 +19,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
         private readonly UserManager<ApplicationUser> _userManager;
 
         public Group Group { get; set; }
+        public InvitationRequest InvRequest { get; set; }
         public LeaveGroupModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
@@ -64,6 +65,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
             
 
             string uid = _userManager.GetUserId(User);
+            InvRequest = await _context.InvitationRequest.FirstOrDefaultAsync(x => x.InvokerId == uid);
 
             if (_context.UserGroups.Where(e => e.GroupId == gid && e.UserId == uid).Count() == 0)
                 return Forbid(); //nie ma takiego usera w grupie
@@ -71,6 +73,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
             UserGroup RecordToDelete = _context.UserGroups.Where(e => e.UserId == uid).FirstOrDefault();
 
             Group.Members.Remove(RecordToDelete);
+            InvRequest.Status = InvitationStatus.Declined;
 
             _context.Attach(Group).State = EntityState.Modified;
             await _context.SaveChangesAsync();

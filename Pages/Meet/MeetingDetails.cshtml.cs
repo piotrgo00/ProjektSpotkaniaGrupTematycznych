@@ -36,5 +36,11 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
 
             return Page();
         }
+        public bool IsMeetingAdmin(string userID, Group group)
+        {
+            if (userID == group.OwnerID)
+                return true;
+            return false;
+        }
     }
 }

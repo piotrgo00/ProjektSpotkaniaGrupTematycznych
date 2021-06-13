@@ -123,29 +123,32 @@
         <tbody>
             @foreach (var item in Model.Group.Meetings)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Topic)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Location)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParticipantLimit)
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Topic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParticipantLimit)
+                </td>
+                <td>
+                    <a asp-page="./Meet/JoinMeeting" asp-route-mid="@Model.Group.Id">Join Meeting</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
     @if (UserManager.GetUserId(User) == Model.Group.OwnerID)
     {
-        <a asp-page="./MeetingFolder/CreateMeeting" asp-route-gid="@Model.Group.Id">Add meeting</a>
+        <a asp-page="./Meet/CreateMeeting" asp-route-gid="@Model.Group.Id">Add meeting</a>
     }
 </div>
 @if (UserManager.GetUserId(User) == Model.Group.OwnerID)

@@ -1,0 +1,95 @@
+﻿@page
+@model ProjektSpotkaniaGrupTematycznych.Pages.GroupsModel
+
+@{
+    ViewData["Title"] = "MyGroups";
+}
+@using Microsoft.AspNetCore.Identity
+@using ProjektSpotkaniaGrupTematycznych.Models;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<h1>Groups</h1>
+
+<p>
+    <a asp-page="/CreateGroup">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Group[0].GroupName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Group[0].City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Group[0].GroupCategory)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Group)
+        {
+            @if (UserManager.GetUserId(User) == item.OwnerID)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GroupName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GroupCategory.CategoryName)
+                    </td>
+                    <td>
+                        <a asp-page="./DetailsGroup" asp-route-id="@item.Id">Details</a>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var member in item.Members)
+                {
+                    if (UserManager.GetUserId(User) == member.UserId)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GroupName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GroupCategory.CategoryName)
+                            </td>
+                            <td>
+                                <a asp-page="./DetailsGroup" asp-route-id="@item.Id">Details</a>
+                            </td>
+                        </tr>
+                        break;
+                    }
+                }
+            }
+        }
+    </tbody>
+</table>
+<div class="sidebar sticky">
+    <form class="col-md-6" method="post">
+        <div class="center" style="width:max-content">
+            <input placeholder="Search by category" type="text" asp-for="CategoryName" />
+        </div>
+        <div class="center" style="width:max-content">
+            <input placeholder="Search by city" type="text" asp-for="CityName" />
+        </div>
+        <div class="center" style="width:max-content">
+            <input placeholder="Search by group name" type="text" asp-for="GroupName" />
+        </div>
+        <div class="center" style="width:max-content">
+            <input type="submit" value="Search" />
+        </div>
+    </form>
+</div>

@@ -32,7 +32,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             Meeting = _context.Meeting.Include(f => f.Participants).ThenInclude(g => g.User).Where(e => e.Id == mid).FirstOrDefault();
 
             if (_context.UserMeeting.Where(p => p.MeetingId == mid && p.UserId == _userManager.GetUserId(User)).Count() > 0) //jest juz w tej grupie
-                return RedirectToPage("Meet/DetailsGroup", new { mid = Meeting.Id });
+                return RedirectToPage("/Meet/DetailsGroup", new { mid = Meeting.Id });
             //Group = _context.Group.Where(e => e.Id == Meeting.GroupID).FirstOrDefault();
 
 

@@ -32,7 +32,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            Meeting.GroupId = _id;
+            Meeting.GroupID = _id;
             if (!ModelState.IsValid)
             {
                 return Page();

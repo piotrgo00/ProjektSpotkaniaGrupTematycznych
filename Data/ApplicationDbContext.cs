@@ -19,6 +19,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Data
 
         public DbSet<InvitationRequest> InvitationRequest { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
+        public DbSet<UserMeeting> UserMeeting { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -33,7 +34,16 @@ namespace ProjektSpotkaniaGrupTematycznych.Data
                 .WithMany(g => g.Groups)
                 .HasForeignKey(ug => ug.UserId);
 
-
+            builder.Entity<UserMeeting>()
+                .HasKey(ug => new { ug.MeetingId, ug.UserId });
+            builder.Entity<UserMeeting>()
+                .HasOne(ug => ug.Meeting)
+                .WithMany(u => u.Participants)
+                .HasForeignKey(ug => ug.MeetingId);
+            builder.Entity<UserMeeting>()
+                .HasOne(ug => ug.User)
+                .WithMany(g => g.Meetings)
+                .HasForeignKey(ug => ug.UserId);
             //....
         }
     }

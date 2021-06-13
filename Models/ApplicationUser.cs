@@ -24,5 +24,6 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         public string LastName { get; set; }
 
         public ICollection<UserGroup> Groups { get; set; }
+        public ICollection<UserMeeting> Meetings { get; set; }
     }
 }

@@ -32,7 +32,9 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         public int ParticipantLimit { get; set; }
 
         [Required]
-        
         public int GroupID { get; set; }
+
+        [Display(Name = "Participants")]
+        public ICollection<UserMeeting> Participants { get; set; }
     }
 }

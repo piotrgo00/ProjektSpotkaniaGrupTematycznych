@@ -26,16 +26,12 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             _context = context;
         }
 
-        public IList<Group> Group { get; set; }
-        public IList<Category> Category { get; set; }
-
+        public IList<Group> Groups { get; set; }
+        public IList<Category> Categories { get; set; }
         public async Task OnGetAsync()
         {
-            Group = await _context.Group.ToListAsync();
-            System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(Group));
-            Category = await _context.Category.ToListAsync();
-
-
+            Groups = await _context.Group.Include(m => m.Members).Include(c => c.GroupCategory).ToListAsync();
+            // Categories = await _context.Category.ToListAsync();
         }
         public async Task<IActionResult> OnPostAsync()
         {
@@ -45,8 +41,16 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
                 GroupName = "";
             if (CityName == null)
                 CityName = "";
-            //Group = await _context.Group.Include(g => g.Members).FirstOrDefault();
-            Category = await _context.Category.ToListAsync();
+
+            Groups = _context.Group
+                    .Where(entity => entity.GroupName.Contains(GroupName) &&
+                     entity.GroupCategory.CategoryName.Contains(CategoryName) &&
+                     entity.City.Contains(CityName))
+                    .OrderByDescending(entity => entity.Id)
+                    .Include(m => m.Members).Include(c => c.GroupCategory)
+                    .ToList();
+
+            // Categories = await _context.Category.ToListAsync();
             return Page();
         }
     }

@@ -60,11 +60,14 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             if (Group == null)
             {
                 //jakis tempdata ze jest error
-                return Page();
+                return NotFound();
             }
             var userId = _userManager.GetUserId(HttpContext.User);
 
-            var _inv = _context.InvitationRequest.Where(p => p.InvokerId == userId && p.GroupID == (int)id).ToList(); //istnieje juz taki request
+            if (_context.UserGroups.Where(p => p.GroupId == (int)id && p.UserId == userId).ToList().Count >= 1)
+                return Page(); //juz jest w grupie
+
+            var _inv = _context.InvitationRequest.Where(p => p.InvokerId == userId && p.GroupID == (int)id && p.Status == InvitationStatus.Pending).ToList(); //istnieje juz taki request
             if (_inv.Count >0)
             {
                 //error message
@@ -73,6 +76,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             InvRequest.GroupID = (int)id;
             InvRequest.RequestDate = DateTime.Now;
             InvRequest.InvokerId = userId;
+            InvRequest.Status = InvitationStatus.Pending;
 
             _context.InvitationRequest.Add(InvRequest);
             await _context.SaveChangesAsync();

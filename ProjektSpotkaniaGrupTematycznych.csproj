@@ -8,6 +8,10 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20210607184123_NullableFix.cs" />
     <Compile Remove="Data\Migrations\20210607184123_NullableFix.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210613104149_Working.cs" />
+    <Compile Remove="Data\Migrations\20210613104149_Working.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210613112243_Test.cs" />
+    <Compile Remove="Data\Migrations\20210613112243_Test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,6 +5,12 @@
     ViewData["Title"] = "DetailsGroup";
 }
 
+@using Microsoft.AspNetCore.Identity
+@using ProjektSpotkaniaGrupTematycznych.Models;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 <h1>DetailsGroup</h1>
 
 <div>
@@ -48,48 +54,46 @@
                 <h5>Owner of the group has not selected category!</h5>
             }
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayFor(model => model.Group.Members)
-        </dt>
-</dl>
+        
+    </dl>
 </div>
 <h3>Members</h3>
 <div>
     <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Group.Members[0].UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Group.Members[0].FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Group.Members[0].LastName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Group.Members)
-        {
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Group.Members.ToList()[0].User.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Group.Members.ToList()[0].User.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Group.Members.ToList()[0].User.LastName)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Group.Members)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.LastName)
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
-
-<h3>Inv requests</h3>
+@if (UserManager.GetUserId(User) == Model.Group.OwnerID) { 
+    <h3>Inv requests</h3>
 <div>
     <table class="table">
         <thead>
@@ -108,7 +112,7 @@
         </thead>
         <tbody>
             @foreach (var item in Model.InvitationRequests)
-            {
+            { if (item.Status == InvitationStatus.Pending) { 
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.RequestDate)
@@ -119,12 +123,17 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Reason)
                     </td>
+                    <td>
+                        <a asp-page="Manage/AcceptRequest" asp-route-id="@item.Id">Accept</a> |
+                        <a asp-page="/Manage/DetailsGroup" asp-route-id="@item.Id">Decline</a>
+                    </td>
                 </tr>
+                }
             }
         </tbody>
     </table>
 </div>
-
+}
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Group.Id">Edit</a> |
     <a asp-page="./Groups">Back to List</a>

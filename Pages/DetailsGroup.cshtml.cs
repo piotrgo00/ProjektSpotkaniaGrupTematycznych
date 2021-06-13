@@ -35,18 +35,19 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
                 return NotFound();
             }
 
-            Group = await _context.Group.FirstOrDefaultAsync(m => m.Id == id);
+            Group = await _context.Group.Include( g => g.Members).ThenInclude(y => y.User).Include(group => group.Meetings).FirstOrDefaultAsync(m => m.Id == id);
             if (Group == null)
                 return NotFound();
 
-            _context.Entry(Group).Collection(b => b.Members).Load(); //load dependecies
+            //_context.Entry(Group).Collection(b => b.Members).Load(); //load dependecies
             //Group.Members = await _context.Application
+            
             Group.GroupCategory = await _context.Category.FirstOrDefaultAsync(m => m.Id == Group.GroupCategoryId);
             GroupOwner = await _context.Users.FirstOrDefaultAsync(m => m.Id == Group.OwnerID);
-
+            
             InvitationRequests = await _context.InvitationRequest.Where(entity => entity.GroupID == Group.Id).ToListAsync();
 
-            System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(Group));
+            //System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(Group));
 
             
 

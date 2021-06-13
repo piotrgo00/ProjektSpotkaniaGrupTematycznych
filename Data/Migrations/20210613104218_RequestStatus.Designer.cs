@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjektSpotkaniaGrupTematycznych.Data;
 
 namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210613104218_RequestStatus")]
+    partial class RequestStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,6 +176,9 @@ namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max)");
 
@@ -216,6 +221,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -346,21 +353,6 @@ namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
                     b.ToTable("Meeting");
                 });
 
-            modelBuilder.Entity("ProjektSpotkaniaGrupTematycznych.Models.UserGroup", b =>
-                {
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("GroupId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserGroups");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -412,6 +404,13 @@ namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProjektSpotkaniaGrupTematycznych.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("ProjektSpotkaniaGrupTematycznych.Models.Group", null)
+                        .WithMany("Members")
+                        .HasForeignKey("GroupId");
+                });
+
             modelBuilder.Entity("ProjektSpotkaniaGrupTematycznych.Models.Group", b =>
                 {
                     b.HasOne("ProjektSpotkaniaGrupTematycznych.Models.Category", "GroupCategory")
@@ -424,21 +423,6 @@ namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
                     b.HasOne("ProjektSpotkaniaGrupTematycznych.Models.Group", null)
                         .WithMany("Meetings")
                         .HasForeignKey("GroupID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProjektSpotkaniaGrupTematycznych.Models.UserGroup", b =>
-                {
-                    b.HasOne("ProjektSpotkaniaGrupTematycznych.Models.Group", "Group")
-                        .WithMany("Members")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjektSpotkaniaGrupTematycznych.Models.ApplicationUser", "User")
-                        .WithMany("Groups")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

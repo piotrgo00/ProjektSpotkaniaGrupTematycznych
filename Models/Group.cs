@@ -29,7 +29,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         public string City { get; set; }
 
         [Display(Name = "Members")]
-        public List<ApplicationUser> Members { get; set; }
+        public ICollection<UserGroup> Members { get; set; }
         
         
         public string OwnerID { get; set; }
@@ -42,6 +42,6 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         [ForeignKey("GroupCategoryId")]
         public Category GroupCategory { get; set; }
 
-        public List<Meeting> Meetings { get; set; }
+        public ICollection<Meeting> Meetings { get; set; }
     }
 }

@@ -22,5 +22,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         [MaxLength(25)]
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
+
+        public ICollection<UserGroup> Groups { get; set; }
     }
 }

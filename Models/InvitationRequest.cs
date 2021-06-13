@@ -27,7 +27,18 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         [MaxLength(255)]
         public string Reason { get; set; }
 
-
+        [Display(Name = "ID Grupy")]
         public int GroupID { get; set; }
+
+        public InvitationStatus Status { get; set; }
+
+
     }
+    public enum InvitationStatus
+    {
+        Pending,
+        Accepted,
+        Declined
+    }
+
 }

@@ -16,12 +16,22 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
+        public ApplicationUser _user { get; set; }
+
         public Group group { get; set; }
+
+
+        public DeleteMemberModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
+
         public async Task<IActionResult> OnGetAsync(string? uid, int? gid)
         {
             if (uid == null || gid == null)
                 return NotFound();
-            return Page();
+            
 
             group = await _context.Group.Include(g => g.Members).ThenInclude(y => y.User).Include(group => group.Meetings).FirstOrDefaultAsync(m => m.Id == gid);
             if (group == null)
@@ -30,6 +40,11 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
             if (group.OwnerID != _userManager.GetUserId(User))
                 return Forbid();
 
+            _user = _userManager.Users.FirstOrDefault(u => u.Id == uid);
+            if (_user == null)
+                return NotFound();
+
+            return Page();
         }
         public async Task<IActionResult> OnPostAsync(string? uid, int? gid)
         {
@@ -51,7 +66,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
             _context.Attach(group).State = EntityState.Modified;
             //_context.Attach(UserGroup).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return Page();
+            //return Page();
+            return RedirectToPage("/DetailsGroup", new { id = group.Id });
         }
     }
 }

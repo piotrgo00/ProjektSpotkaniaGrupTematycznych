@@ -143,7 +143,13 @@
                     @Html.DisplayFor(modelItem => item.Location)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.OnlineLink)
+                    @if (Model.IsInGroup(UserManager.GetUserId(User), Model.Group.Id) || Model.Group.OwnerID == UserManager.GetUserId(User)) {
+                        @Html.DisplayFor(modelItem => item.OnlineLink)
+                    } else
+                    {
+                        @Html.Raw("Members Only!")
+                    }
+
                 </td>
                 <td>
                     @item.Participants.Count()/@Html.DisplayFor(modelItem => item.ParticipantLimit)

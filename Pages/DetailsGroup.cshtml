@@ -118,6 +118,9 @@
                     @Html.DisplayNameFor(model => model.Group.Meetings.ToList()[0].Location)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Group.Meetings.ToList()[0].OnlineLink)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Group.Meetings.ToList()[0].ParticipantLimit)
                 </th>
                 <th></th>
@@ -140,18 +143,29 @@
                     @Html.DisplayFor(modelItem => item.Location)
                 </td>
                 <td>
+                    @if (Model.IsInGroup(UserManager.GetUserId(User), Model.Group.Id) || Model.Group.OwnerID == UserManager.GetUserId(User)) {
+                        @Html.DisplayFor(modelItem => item.OnlineLink)
+                    } else
+                    {
+                        @Html.Raw("Members Only!")
+                    }
+
+                </td>
+                <td>
                     @item.Participants.Count()/@Html.DisplayFor(modelItem => item.ParticipantLimit)
                 </td>
                 <td>
-               @if (!(UserManager.GetUserId(User) == Model.Group.OwnerID || Model.IsInMeeting(item, UserManager.GetUserId(User)) || item.Participants.Count()>=item.ParticipantLimit))
-                {
-                    <a asp-page="./Meet/JoinMeeting" asp-route-mid="@item.Id">Join Meeting</a>   
-                }
-                else if (UserManager.GetUserId(User) == Model.Group.OwnerID)
-                {
-                    <a asp-page="./Meet/DeleteMeeting" asp-route-mid="@item.Id">Delete Meeting</a>
-                }
-                 | <a asp-page="./Meet/MeetingDetails" asp-route-mid="@item.Id">Details</a>
+                    @if (!(UserManager.GetUserId(User) == Model.Group.OwnerID || Model.IsInMeeting(item, UserManager.GetUserId(User)) || item.Participants.Count() >= item.ParticipantLimit || !Model.IsInGroup(UserManager.GetUserId(User), Model.Group.Id)))
+                    {
+                        <a asp-page="./Meet/JoinMeeting" asp-route-mid="@item.Id">Join Meeting</a>
+                        @Html.Raw("|");
+                    }
+                    else if (UserManager.GetUserId(User) == Model.Group.OwnerID)
+                    {
+                        <a asp-page="./Meet/DeleteMeeting" asp-route-mid="@item.Id">Delete Meeting</a>
+                        @Html.Raw("|");
+                    }
+                    <a asp-page="./Meet/MeetingDetails" asp-route-mid="@item.Id">Details</a>
                 </td>
             </tr>
             }

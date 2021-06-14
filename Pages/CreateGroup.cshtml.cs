@@ -62,8 +62,9 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
                 return Page();
             }
 
-            if (_context.Group.Where(m => m.OwnerID == _userManager.GetUserId(User)).Count() >= 3) //tutaj ma sie odwolywac do appsettings
+            if (_context.Group.Where(m => m.OwnerID == _userManager.GetUserId(User)).Count() >= 10) //tutaj ma sie odwolywac do appsettings
             {
+                TempData["errorMessage"] = "Maksymalna liczba grup 10!";
                 return Page(); // i tutaj jaks wiadomosc
             }
 

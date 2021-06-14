@@ -37,8 +37,15 @@
             @Html.DisplayNameFor(model => model.Meeting.OnlineLink)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Meeting.OnlineLink)
-        </dd>
+            @if (Model.IsInGroup(UserManager.GetUserId(User), Model.Group.Id) || Model.Group.OwnerID == UserManager.GetUserId(User))
+            {
+                @Html.DisplayFor(model => model.Meeting.OnlineLink)
+            }
+            else
+            {
+                @Html.Raw("Members Only!")
+            }
+            </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Meeting.Date)
         </dt>

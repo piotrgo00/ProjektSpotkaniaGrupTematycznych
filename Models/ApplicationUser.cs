@@ -11,16 +11,14 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
     {
         //[Display(Name = "Nazwa użytkownika")]
         //public string UserName { get; set; }
-        [Display(Name = "Zdjęcie profilowe")]
-        public byte[] Image { get; set; }
         //public string AvatarURL { get; set; }
         [Required]
         [MaxLength(25)]
-        [Display(Name = "Imię")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
         [MaxLength(25)]
-        [Display(Name = "Nazwisko")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         public ICollection<UserGroup> Groups { get; set; }

@@ -15,17 +15,17 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
 
         [Required]
         [MaxLength(20)]
-        [Display(Name = "Nazwa grupy")]
+        [Display(Name = "Group Name")]
         public string GroupName { get; set; }
 
         [Required]
         [MaxLength(120)]
-        [Display(Name = "Opis")]
+        [Display(Name = "Description")]
         public string GroupDescription { get; set; }
 
         [Required]
         [MaxLength(20)]
-        [Display(Name = "Miasto")]
+        [Display(Name = "City")]
         public string City { get; set; }
 
         [Display(Name = "Members")]
@@ -35,10 +35,10 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         public string OwnerID { get; set; }
 
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "Kategoria")]
+        [Display(Name = "Category")]
         public int? GroupCategoryId { get; set; }
 
-        [Display(Name = "Kategoria")]
+        [Display(Name = "Category")]
         [ForeignKey("GroupCategoryId")]
         public Category GroupCategory { get; set; }
 

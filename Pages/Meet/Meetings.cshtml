@@ -27,6 +27,9 @@
                 @Html.DisplayNameFor(model => model.Meetings[0].Location)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Meetings[0].OnlineLink)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Meetings[0].ParticipantLimit)
             </th>
             <th></th>
@@ -35,30 +38,34 @@
     <tbody>
         @foreach (var item in Model.Meetings)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Topic)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ParticipantLimit)
-                </td>
-                <td>
-                    <a asp-page="/Meet/MeetingDetails" asp-route-mid="@item.Id">Details</a> |
-                    @if (Model.IsInMeeting(item, UserManager.GetUserId(User))) {
-                        <a asp-page="/Meet/LeaveMeeting" asp-route-mid="@item.Id">Leave meeting</a> 
-                       }
-                    <a asp-page="/Meet/GetTicket" asp-route-mid="@item.Id">Get ticket</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OnlineLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParticipantLimit)
+            </td>
+            <td>
+                <a asp-page="/Meet/MeetingDetails" asp-route-mid="@item.Id">Details</a> |
+                @if (Model.IsInMeeting(item, UserManager.GetUserId(User)))
+                {
+                    <a asp-page="/Meet/LeaveMeeting" asp-route-mid="@item.Id">Leave meeting</a>
+                }
+                <a asp-page="/Meet/GetTicket" asp-route-mid="@item.Id">Get ticket</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

@@ -34,6 +34,11 @@
                 <span asp-validation-for="Meeting.Location" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Meeting.OnlineLink" class="control-label"></label>
+                <input asp-for="Meeting.OnlineLink" class="form-control" />
+                <span asp-validation-for="Meeting.OnlineLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Meeting.ParticipantLimit" class="control-label"></label>
                 <input asp-for="Meeting.ParticipantLimit" class="form-control" />
                 <span asp-validation-for="Meeting.ParticipantLimit" class="text-danger"></span>

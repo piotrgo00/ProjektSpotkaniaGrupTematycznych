@@ -22,6 +22,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
 
         [Required]
         public DateTime Date { get; set; }
+        [Required]
+        public string OnlineLink { get; set; }
 
         [Required]
         [MaxLength(100)]

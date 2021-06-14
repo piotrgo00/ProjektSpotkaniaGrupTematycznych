@@ -2,3 +2,33 @@
 @model ProjektSpotkaniaGrupTematycznych.Pages.Meet.GetTicketModel
 @{
 }
+<div>
+    <h4>Ticket Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Group.GroupName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Group.GroupName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meeting.Topic)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meeting.Topic)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meeting.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meeting.Location)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meeting.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meeting.Date)
+        </dd>
+    </dl>
+</div>

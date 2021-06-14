@@ -1,4 +1,5 @@
 # ProjektSpotkaniaGrupTematycznych
+## Funkcjonalności
 Stworzona aplikacja internetowa służy do ułatwienia tworzenia spotkań osób o podobnych zainteresowaniach.  
 
 Niezalogowany użytkownik może zarejestrować się w serwisie podając swoje imię, nazwisko, nazwę użytkownika, e-mail oraz hasło. Po zatwierdzeniu formularza serwer wysyła na wcześniej podanego maila prośbę o potwierdzenie utworzenia konta. Po potwierdzeniu adresu e-mail użytkownik może się zalogować.  
@@ -25,7 +26,7 @@ Uczestnik spotkania może wygenerować i pobrać bilet wstępu na spotkanie w po
 
 Aplikacja ma estetyczny wygląd. 
 
-Wykożystane biblioteki:
+## Wykożystane biblioteki
 - Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 - Microsoft.AspNetCore.Identity.EntityFrameworkCore
 - Microsoft.AspNetCore.Identity.UI

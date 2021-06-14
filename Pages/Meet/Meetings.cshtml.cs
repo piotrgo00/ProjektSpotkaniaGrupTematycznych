@@ -60,5 +60,11 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
 
             return Page();
         }
+        public bool IsInMeeting(Meeting meeting, string userID)
+        {
+            if (_context.UserMeeting.Where(p => p.MeetingId == meeting.Id && p.UserId == userID).Count() > 0)
+                return true;
+            return false;
+        }
     }
 }

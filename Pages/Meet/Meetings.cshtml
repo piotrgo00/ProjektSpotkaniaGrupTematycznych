@@ -4,7 +4,11 @@
 @{
     ViewData["Title"] = "Meetings";
 }
+@using Microsoft.AspNetCore.Identity
+@using ProjektSpotkaniaGrupTematycznych.Models;
 
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 <h1>Meetings</h1>
 
 <table class="table">
@@ -29,29 +33,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Meetings) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Topic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParticipantLimit)
-            </td>
-            <td>
-                <a asp-page="/Meet/MeetingDetails" asp-route-mid="@item.Id">Details</a> |
-                <a asp-page="/Meet/LeaveMeeting" asp-route-mid="@item.Id">Leave meeting</a> |
-                <a asp-page="/Meet/GetTicket" asp-route-mid="@item.Id">Get ticket</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Meetings)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Topic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParticipantLimit)
+                </td>
+                <td>
+                    <a asp-page="/Meet/MeetingDetails" asp-route-mid="@item.Id">Details</a> |
+                    @if (Model.IsInMeeting(item, UserManager.GetUserId(User))) {
+                        <a asp-page="/Meet/LeaveMeeting" asp-route-mid="@item.Id">Leave meeting</a> 
+                       }
+                    <a asp-page="/Meet/GetTicket" asp-route-mid="@item.Id">Get ticket</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

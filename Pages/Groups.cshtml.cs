@@ -39,6 +39,11 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
         {
             Group = await _context.Group.Include(m => m.Members).ToListAsync();
             CurrentUser = await _userManager.GetUserAsync(User);
+            if (CurrentUser == null)
+            {
+                CurrentUser = new ApplicationUser();
+                CurrentUser.Id = "0";
+            }
             InvRequests = await _context.InvitationRequest.Where(x => x.InvokerId == CurrentUser.Id).ToListAsync();
             Category = await _context.Category.ToListAsync();         
         }

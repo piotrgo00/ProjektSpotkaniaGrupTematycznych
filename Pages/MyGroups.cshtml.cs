@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using ProjektSpotkaniaGrupTematycznych.Data;
 using ProjektSpotkaniaGrupTematycznych.Models;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjektSpotkaniaGrupTematycznych.Pages
 {
+    [Authorize]
     public class MyGroupsModel : PageModel
     {
         private readonly ApplicationDbContext _context;

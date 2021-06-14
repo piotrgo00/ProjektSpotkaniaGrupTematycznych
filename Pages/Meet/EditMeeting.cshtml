@@ -1,0 +1,53 @@
+﻿@page
+@model ProjektSpotkaniaGrupTematycznych.Pages.Meet.EditMeetingModel
+@{
+}
+<h1>EditGroup</h1>
+
+<h4>Meeting</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Meeting.Id" />
+            <input type="hidden" asp-for="Meeting.GroupID" />
+            <div class="form-group">
+                <label asp-for="Meeting.Topic" class="control-label"></label>
+                <input asp-for="Meeting.Topic" class="form-control" />
+                <span asp-validation-for="Meeting.Topic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Meeting.Description" class="control-label"></label>
+                <input asp-for="Meeting.Description" class="form-control" />
+                <span asp-validation-for="Meeting.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Meeting.Date" class="control-label"></label>
+                <input asp-for="Meeting.Date" class="form-control" />
+                <span asp-validation-for="Meeting.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Meeting.Location" class="control-label"></label>
+                <input asp-for="Meeting.Location" class="form-control" />
+                <span asp-validation-for="Meeting.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Meeting.ParticipantLimit" class="control-label"></label>
+                <input asp-for="Meeting.ParticipantLimit" class="form-control" />
+                <span asp-validation-for="Meeting.ParticipantLimit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./MeetingDetails" asp-route-mid="@Model.Meeting.Id">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

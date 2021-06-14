@@ -24,6 +24,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         public DateTime Date { get; set; }
         [Required]
         [UrlAttribute]
+        [Display(Name = "Online Link")]
         public string OnlineLink { get; set; }
 
         [Required]
@@ -32,6 +33,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
 
         [Required]
         [Range(1,999)]
+        [Display(Name = "Participant Limit")]
         public int ParticipantLimit { get; set; }
 
         [Required]

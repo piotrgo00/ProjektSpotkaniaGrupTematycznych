@@ -13,6 +13,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         [Required]
         public string QR { get; set; }
         [Required]
+        [Display(Name = "Group Name")]
         public string GroupName { get; set; }
         [Required]
         public string Topic { get; set; }
@@ -21,6 +22,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         [Required]
         public DateTime Date { get; set; }
         [Required]
+        [Display(Name = "Meeting Id")]
         public int MeetingId { get; set; }
     }
 }

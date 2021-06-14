@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjektSpotkaniaGrupTematycznych.Data;
 
 namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210614191209_GetTicket")]
+    partial class GetTicket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -369,8 +371,11 @@ namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QR")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Topic")
                         .IsRequired()
@@ -379,8 +384,6 @@ namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MeetingId");
-
-                    b.HasIndex("OwnerId");
 
                     b.ToTable("Ticket");
                 });
@@ -487,12 +490,6 @@ namespace ProjektSpotkaniaGrupTematycznych.Data.Migrations
                     b.HasOne("ProjektSpotkaniaGrupTematycznych.Models.Meeting", null)
                         .WithMany("Tickets")
                         .HasForeignKey("MeetingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjektSpotkaniaGrupTematycznych.Models.ApplicationUser", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

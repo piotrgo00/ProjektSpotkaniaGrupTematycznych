@@ -95,7 +95,7 @@
                     <td>
                         @if (Model.IsMeetingAdmin(UserManager.GetUserId(User), Model.Group))
                         {
-                            <a asp-page="/Manage/DeleteParticipant" asp-route-uid="@item.UserId" asp-route-mid="@Model.Meeting.Id">Delete </a>
+                            <a asp-page="/Meet/DeleteParticipant" asp-route-uid="@item.UserId" asp-route-mid="@Model.Meeting.Id">Delete </a>
                         }
                         UserDetails(comingSoon)
                     </td>

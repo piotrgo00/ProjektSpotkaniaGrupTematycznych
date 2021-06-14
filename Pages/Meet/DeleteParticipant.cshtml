@@ -2,3 +2,32 @@
 @model ProjektSpotkaniaGrupTematycznych.Pages.Meet.DeleteParticipantModel
 @{
 }
+
+<h1>Delete Participant</h1>
+
+<h3>Are you sure you want to do this?</h3>
+<div>
+    <h4>Deletion</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model._user.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model._user.UserName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model._user.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model._user.Email)
+        </dd>
+
+    </dl>
+
+    <form method="post">
+        <input type="submit" value="Accept" />
+    </form>
+    <a asp-page="/Meet/MeetingDetails" asp-route-mid="@Model.userMeeting.MeetingId">Back to the Group Details</a>
+</div>

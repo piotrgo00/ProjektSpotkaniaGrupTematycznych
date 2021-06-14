@@ -110,28 +110,6 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             ApplicationUser CurrentUser = await _userManager.GetUserAsync(User);
             Ticket = _context.Ticket.FirstOrDefault(p => p.MeetingId == Meeting.Id && p.Owner == CurrentUser);
 
-            //Initialize HTML to PDF converter 
-            HtmlToPdfConverter htmlConverter = new HtmlToPdfConverter(HtmlRenderingEngine.WebKit);
-
-            WebKitConverterSettings settings = new WebKitConverterSettings();
-
-            //Set WebKit path
-            settings.WebKitPath = Path.Combine(_hostingEnvironment.ContentRootPath, "QtBinariesWindows");
-
-            //Assign WebKit settings to HTML converter
-            htmlConverter.ConverterSettings = settings;
-
-            //Convert URL to PDF
-            PdfDocument document = htmlConverter.Convert("https://www.google.com");
-
-            //Saving the PDF to the MemoryStream
-            MemoryStream stream = new MemoryStream();
-
-            document.Save(stream);
-
-            //Download the PDF document in the browser
-            return File(stream.ToArray(), System.Net.Mime.MediaTypeNames.Application.Pdf, "Output.pdf");
-
             return Page();
         }
     }

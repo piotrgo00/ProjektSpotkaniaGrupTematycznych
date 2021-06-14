@@ -26,7 +26,7 @@ Uczestnik spotkania może wygenerować i pobrać bilet wstępu na spotkanie w po
 
 Aplikacja ma estetyczny wygląd. 
 
-## Wykożystane biblioteki
+## Wykorzystane biblioteki
 - Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 - Microsoft.AspNetCore.Identity.EntityFrameworkCore
 - Microsoft.AspNetCore.Identity.UI

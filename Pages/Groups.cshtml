@@ -56,30 +56,33 @@
                     else
                     {
                         bool check = false;
-                        foreach (var x in Model.InvRequests)
+                        if (Model.InvRequests != null)
                         {
-                            if (item.Id == x.GroupID)
+                            foreach (var x in Model.InvRequests)
                             {
-                                check = true;
-                                if (x.Status == InvitationStatus.Accepted)
+                                if (item.Id == x.GroupID)
                                 {
+                                    check = true;
+                                    if (x.Status == InvitationStatus.Accepted)
+                                    {
                                     <a style="color:yellowgreen">Joined</a>
-                                    check = true;
-                                    break;
-                                }
-                                else if (x.Status == InvitationStatus.Pending)
-                                {
+                                        check = true;
+                                        break;
+                                    }
+                                    else if (x.Status == InvitationStatus.Pending)
+                                    {
                                     <a style="color:cornflowerblue">Invitation Pending</a>
-                                    check = true;
-                                    break;
-                                }
-                                else if (x.Status == InvitationStatus.Declined)
-                                {
+                                        check = true;
+                                        break;
+                                    }
+                                    else if (x.Status == InvitationStatus.Declined)
+                                    {
                                     <a style="color:red">Invitation Declined</a>
                                     <a> | </a>
                                     <a style="color:cornflowerblue" asp-page="./Enlist" asp-route-id="@item.Id" asp-route-retrybool="@true" asp-page-handler="Retry">Retry!</a>
-                                    check = true;
-                                    break;
+                                        check = true;
+                                        break;
+                                    }
                                 }
                             }
                         }

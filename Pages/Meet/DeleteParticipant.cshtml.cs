@@ -29,6 +29,9 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             if (uid == null || mid == null)
                 return NotFound();
 
+            _user = _context.Users.Where(p => p.Id == uid).FirstOrDefault();
+            if (_user == null)
+                return NotFound();
 
             userMeeting = _context.UserMeeting.Include(p => p.User).Include(m => m.Meeting).Where(d => d.MeetingId == mid && d.UserId == uid).FirstOrDefault();
             if (userMeeting == null)

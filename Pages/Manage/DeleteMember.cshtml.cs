@@ -61,15 +61,15 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
                 return Forbid();
 
 
-            UserGroup RecordToDelete = _context.UserGroups.Where(e => e.UserId == uid).FirstOrDefault();
+            UserGroup RecordToDelete = _context.UserGroups.Where(e => e.UserId == uid && e.GroupId == (int)gid).FirstOrDefault();
             if (RecordToDelete is null)
                 return Forbid();
 
             group.Members.Remove(RecordToDelete);
 
             InvitationRequest InvToDelete =  _context.InvitationRequest.Where(p => p.InvokerId == uid).FirstOrDefault() ;
-
-            _context.InvitationRequest.Remove(InvToDelete);
+            if (InvToDelete != null)
+                 _context.InvitationRequest.Remove(InvToDelete);
 
             _context.Attach(group).State = EntityState.Modified;
 

@@ -96,7 +96,7 @@ namespace ProjektSpotkaniaGrupTematycznych
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseStatusCodePagesWithReExecute("/Error", "?code={0}");
             app.UseRouting();
 
             app.UseAuthentication();

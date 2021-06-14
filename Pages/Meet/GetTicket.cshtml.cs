@@ -39,7 +39,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             else
                 return NotFound();
 
-            if(_context.Ticket.Where(p => p.MeetingId == Meeting.Id && p.))
+            //if(_context.Ticket.Where(p => p.MeetingId == Meeting.Id && p.))
 
             return Page();
         }
@@ -54,8 +54,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             Ticket.Topic = Meeting.Topic;
             Ticket.Location = Meeting.Location;
             Ticket.Date = Meeting.Date;
-            Ticket.
-            _context.Ticket.Add(Ticket);
+            //Ticket.
+            //_context.Ticket.Add(Ticket);
 
             return Page();
         }

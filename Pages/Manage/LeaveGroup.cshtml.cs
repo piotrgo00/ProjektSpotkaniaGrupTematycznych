@@ -70,14 +70,15 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
             if (_context.UserGroups.Where(e => e.GroupId == gid && e.UserId == uid).Count() == 0)
                 return Forbid(); //nie ma takiego usera w grupie
 
-            UserGroup RecordToDelete = _context.UserGroups.Where(e => e.UserId == uid).FirstOrDefault();
+            UserGroup RecordToDelete = _context.UserGroups.Where(e => e.UserId == uid && e.GroupId == gid).FirstOrDefault();
 
             Group.Members.Remove(RecordToDelete);
             //InvRequest.Status = InvitationStatus.Declined;
 
             InvitationRequest InvToDelete = _context.InvitationRequest.Where(p => p.InvokerId == uid).FirstOrDefault();
 
-            _context.InvitationRequest.Remove(InvToDelete);
+            if (InvToDelete != null)
+                _context.InvitationRequest.Remove(InvToDelete);
 
 
             _context.Attach(Group).State = EntityState.Modified;

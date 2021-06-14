@@ -10,10 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjektSpotkaniaGrupTematycznych.Models;
 using QRCoder;
-using Syncfusion.Pdf;
-using PdfSharp;
-using Syncfusion.HtmlConverter;
 using Microsoft.AspNetCore.Hosting;
+
 
 namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
 {

@@ -35,7 +35,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
                 return NotFound();
             }
 
-            Group = await _context.Group.Include( g => g.Members).ThenInclude(y => y.User).Include(group => group.Meetings).FirstOrDefaultAsync(m => m.Id == id);
+            Group = await _context.Group.Include( g => g.Members).ThenInclude(y => y.User).Include(group => group.Meetings).ThenInclude(z => z.Participants).FirstOrDefaultAsync(m => m.Id == id);
             if (Group == null)
                 return NotFound();
 

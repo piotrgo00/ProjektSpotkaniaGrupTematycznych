@@ -32,6 +32,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(int? gid)
         {
+            _gid = gid;
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -40,7 +41,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             _context.Meeting.Add(Meeting);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/DetailsGroup", new { id = _gid });
         }
     }
 }

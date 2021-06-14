@@ -73,7 +73,12 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
             UserGroup RecordToDelete = _context.UserGroups.Where(e => e.UserId == uid).FirstOrDefault();
 
             Group.Members.Remove(RecordToDelete);
-            InvRequest.Status = InvitationStatus.Declined;
+            //InvRequest.Status = InvitationStatus.Declined;
+
+            InvitationRequest InvToDelete = _context.InvitationRequest.Where(p => p.InvokerId == uid).FirstOrDefault();
+
+            _context.InvitationRequest.Remove(InvToDelete);
+
 
             _context.Attach(Group).State = EntityState.Modified;
             await _context.SaveChangesAsync();

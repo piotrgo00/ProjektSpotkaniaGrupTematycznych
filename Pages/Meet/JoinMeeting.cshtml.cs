@@ -59,7 +59,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Meet
             await _context.SaveChangesAsync();
 
 
-            return RedirectToPage("/Meet/DetailsGroup", new { mid = Meeting.Id }); //need tempdata to return
+            return RedirectToPage("/Meet/MeetingDetails", new { mid = Meeting.Id }); //need tempdata to return
         }
     }
 }

@@ -137,10 +137,10 @@
                     @Html.DisplayFor(modelItem => item.Location)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ParticipantLimit)
+                    @item.Participants.Count()/@Html.DisplayFor(modelItem => item.ParticipantLimit)
                 </td>
                 <td>
-               @if (!(UserManager.GetUserId(User) == Model.Group.OwnerID || Model.IsInMeeting(item, UserManager.GetUserId(User))))
+               @if (!(UserManager.GetUserId(User) == Model.Group.OwnerID || Model.IsInMeeting(item, UserManager.GetUserId(User)) || item.Participants.Count()>=item.ParticipantLimit))
                 {
                     
                     <a asp-page="./Meet/JoinMeeting" asp-route-mid="@item.Id">Join Meeting</a>

@@ -21,6 +21,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
         public ApplicationUser _user { get; set; }
 
         public Group group { get; set; }
+        public InvitationRequest InvRequest {get;set;}
 
 
         public DeleteMemberModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
@@ -62,11 +63,14 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
 
 
             UserGroup RecordToDelete = _context.UserGroups.Where(e => e.UserId == uid).FirstOrDefault();
+            InvRequest = _context.InvitationRequest.FirstOrDefault(i => i.InvokerId == RecordToDelete.UserId);
 
+            InvRequest.Status = InvitationStatus.Declined;
             group.Members.Remove(RecordToDelete);
-
+            System.Diagnostics.Debug.WriteLine("HWAUDJWAIFWEA");
+            _context.Attach(InvRequest).State = EntityState.Modified;
             _context.Attach(group).State = EntityState.Modified;
-            //_context.Attach(UserGroup).State = EntityState.Modified;
+
             await _context.SaveChangesAsync();
             //return Page();
             return RedirectToPage("/DetailsGroup", new { id = group.Id });

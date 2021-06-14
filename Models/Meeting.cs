@@ -23,6 +23,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Models
         [Required]
         public DateTime Date { get; set; }
         [Required]
+        [UrlAttribute]
         public string OnlineLink { get; set; }
 
         [Required]

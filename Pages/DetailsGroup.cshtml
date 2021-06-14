@@ -191,7 +191,7 @@
                         @Html.DisplayFor(modelItem => item.RequestDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.InvokerId)
+                        @Model.Invokers.Where(p => p.Id == item.InvokerId).FirstOrDefault().UserName
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Reason)

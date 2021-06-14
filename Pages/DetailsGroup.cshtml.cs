@@ -26,6 +26,7 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
 
         public Group Group { get; set; }
         public IdentityUser GroupOwner { get; set; }
+        public IList<IdentityUser> Invokers { get; set; }
         public IList<InvitationRequest> InvitationRequests { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -44,13 +45,9 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             
             Group.GroupCategory = await _context.Category.FirstOrDefaultAsync(m => m.Id == Group.GroupCategoryId);
             GroupOwner = await _context.Users.FirstOrDefaultAsync(m => m.Id == Group.OwnerID);
-            
             InvitationRequests = await _context.InvitationRequest.Where(entity => entity.GroupID == Group.Id).ToListAsync();
-
-            //System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(Group));
-
+            Invokers = await _context.Users.ToArrayAsync();
             
-
             return Page();
         }
         public bool IsInMeeting(Meeting meeting, string userID)

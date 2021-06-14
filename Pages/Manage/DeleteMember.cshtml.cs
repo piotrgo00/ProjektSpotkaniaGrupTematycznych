@@ -62,17 +62,19 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
 
 
             UserGroup RecordToDelete = _context.UserGroups.Where(e => e.UserId == uid).FirstOrDefault();
+            if (RecordToDelete is null)
+                return Forbid();
 
             group.Members.Remove(RecordToDelete);
 
-            InvitationRequest InvToDelete =  _context.InvitationRequest.Where(p => p.InvokerId == uid).FirstOrDefault();
+            InvitationRequest InvToDelete =  _context.InvitationRequest.Where(p => p.InvokerId == uid).FirstOrDefault() ;
 
             _context.InvitationRequest.Remove(InvToDelete);
 
             _context.Attach(group).State = EntityState.Modified;
-            //_context.Attach(UserGroup).State = EntityState.Modified;
+
             await _context.SaveChangesAsync();
-            //return Page();
+
             return RedirectToPage("/DetailsGroup", new { id = group.Id });
         }
     }

@@ -43,7 +43,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             {
                 return NotFound();
             }
-            System.Diagnostics.Debug.WriteLine("Podpaski");
+
+
 
             if (Group.OwnerID == _userManager.GetUserId(HttpContext.User))
                 return RedirectToPage("./Groups");
@@ -112,12 +113,11 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
             if (retrybool == true)
             {
                 System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(InvRequest));
-                System.Diagnostics.Debug.WriteLine("Sperma");
+
                 _context.Attach(InvRequest).State = EntityState.Modified;
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("Chuj");
                 _context.InvitationRequest.Add(InvRequest);
             }
             

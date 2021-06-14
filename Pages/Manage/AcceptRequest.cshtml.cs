@@ -33,6 +33,8 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages.Manage
 
 
             InvitationRequest = _context.InvitationRequest.Where(entity => entity.Id == id && entity.Status == InvitationStatus.Pending).FirstOrDefault();
+            if (InvitationRequest == null)
+                return NotFound();
             Group = _context.Group.Where(entity => entity.Id == InvitationRequest.GroupID).FirstOrDefault();
 
             if (InvitationRequest == null)

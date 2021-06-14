@@ -90,7 +90,10 @@
                         @Html.DisplayFor(modelItem => item.User.LastName)
                     </td>
                     <td>
+                        @if (Model.Group.OwnerID == UserManager.GetUserId(User))
+                        {
                         <a asp-page="/Manage/DeleteMember" asp-route-uid="@item.UserId" asp-route-gid="@Model.Group.Id">Delete</a>
+                        }
                     </td>
                 </tr>
             }
@@ -205,6 +208,9 @@
 </div>
 }
 <div>
-    <a asp-page="./EditGroup" asp-route-id="@Model.Group.Id">Edit</a> |
-    <a asp-page="./Groups">Back to List</a>
+    @if (UserManager.GetUserId(User) == Model.Group.OwnerID)
+    {
+    <a asp-page="./EditGroup" asp-route-id="@Model.Group.Id">Edit</a>
+    }
+<a asp-page="./Groups">Back to List</a>
 </div>

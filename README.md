@@ -27,11 +27,12 @@ Uczestnik spotkania może wygenerować i pobrać bilet wstępu na spotkanie w po
 Aplikacja ma estetyczny wygląd. 
 
 ## Wykorzystane biblioteki
-- Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
-- Microsoft.AspNetCore.Identity.EntityFrameworkCore
-- Microsoft.AspNetCore.Identity.UI
-- Microsoft.EntityFrameworkCore.Sqlite
-- Microsoft.EntityFrameworkCore.SqlServer
-- Microsoft.EntityFrameworkCore.Tools
-- Microsoft.VisualStudio.Web.CodeGeneration.Design
+- Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore - middleware do wykrywania i diagnostyki błędów z migracjami Entity Framework Core.
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore - obsługa identity
+- Microsoft.AspNetCore.Identity.UI - wbudowane UI dla ASP.NET Core Identity framework
+- Microsoft.EntityFrameworkCore.Sqlite - SQLite database provider
+- Microsoft.EntityFrameworkCore.SqlServer - Microsoft SQL Server database provider
+- Microsoft.EntityFrameworkCore.Tools - umożliwia wykożystywanie komend: Add-Migration, Drop-Database, Remove-Migration, Update-Database
+- Microsoft.VisualStudio.Web.CodeGeneration.Design - tworzenie kodu ASP.NET Core, zawiera polecenia dotnet-aspnet-codegenerator używane do tworzenia kontrolerów i widoków
 - SendGrid - wysyłanie maili do potwierdzenia rejestracji oraz odzyskiwania hasła
+- QRCoder - tworzenie QR

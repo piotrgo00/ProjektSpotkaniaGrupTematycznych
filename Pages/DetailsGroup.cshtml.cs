@@ -56,5 +56,11 @@ namespace ProjektSpotkaniaGrupTematycznych.Pages
                 return true;
             return false;
         }
+        public bool IsInGroup(string userID, int groupID)
+        {
+            if (_context.UserGroups.Where(p => p.UserId == userID && p.GroupId == groupID).Count() > 0)
+                return true;
+            return false;
+        }
     }
 }

@@ -24,7 +24,7 @@ Użytkownik może zapisać się lub wypisać się do/ze spotkania grupy, do któ
 
 Uczestnik spotkania może wygenerować i pobrać bilet wstępu na spotkanie w postaci pliku PDF. Bilet wstępu powinien zawierać kod QR, numer biletu, nazwę grupy, temat oraz miejsce spotkania, a także datę i godzinę spotkania. 
 
-Aplikacja ma estetyczny wygląd. 
+ ̶A̶p̶l̶i̶k̶a̶c̶j̶a̶ ̶m̶a̶ ̶e̶s̶t̶e̶t̶y̶c̶z̶n̶y̶ ̶w̶y̶g̶l̶ą̶d̶.
 
 ## Wykorzystane biblioteki
 - Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore - middleware do wykrywania i diagnostyki błędów z migracjami Entity Framework Core.

@@ -36,3 +36,9 @@ Uczestnik spotkania może wygenerować i pobrać bilet wstępu na spotkanie w po
 - Microsoft.VisualStudio.Web.CodeGeneration.Design - tworzenie kodu ASP.NET Core, zawiera polecenia dotnet-aspnet-codegenerator używane do tworzenia kontrolerów i widoków
 - SendGrid - wysyłanie maili do potwierdzenia rejestracji oraz odzyskiwania hasła
 - QRCoder - tworzenie QR
+
+## Instalacja/Konfiguracja
+W przypadku korzystania z środowiska Visual Studio, nie jest wymagana dodatkowa konfiguracja projektu. Aby uruchomić projekt w środowisku programistycznym, uprzednio należy wykonać tylko Update-Database i zastosować migracje.
+Następnie projekt automatycznie połączy się z baza SQL Server LocalDB (tutaj jest wymagany fakt doinstalowania odpowiedniej funkcjonalności Visuala).
+
+W każdym innym przypadku (np. Visual Studio Code) wymagane jest zainstalowanie MS SQL Server, ręczne wygenerowanie skryptu migracji (dotnet ef migrations script) oraz ustawienie odpowiedniego "ConnectionStrings" w appsettings.json projektu.
